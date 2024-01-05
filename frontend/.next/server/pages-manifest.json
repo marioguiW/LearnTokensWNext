@@ -1,0 +1,8 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/auth-page-ssr": "pages/auth-page-ssr.js",
+  "/auth-page-static": "pages/auth-page-static.js"
+}
