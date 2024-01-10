@@ -86,6 +86,19 @@ const methodBy = {
     POST: actions.storeToken,
     GET: actions.refreshToken,
     PUT: actions.refreshToken,
+    DELETE: (req, res) => {
+        const ctx = {req, res}
+        nookies.destroy(ctx, REFRESH_TOKEN_NAME, {
+            httpOnly: true,
+            sameSite: 'lax',
+            path: '/'
+        })
+        res.json({
+            data: {
+                deletado: true
+            }
+        })
+    }
     // GET: actions.getToken
 }
 

@@ -14,6 +14,7 @@ function PaginaEstatica(props){
             <pre>
                 {JSON.stringify(props, null, 2)}
             </pre> 
+            <a href="/logout">Logout</a>
         </div>
     )
 }

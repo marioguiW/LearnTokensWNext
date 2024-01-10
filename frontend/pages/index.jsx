@@ -50,6 +50,8 @@ export default function Page(){
                 />
                 <input type="password" name="password" value={values.password} />
                 <button type="submit">submit</button>
+                <a href="/auth-page-ssr">Server Side Render</a><br />
+                <a href="/auth-page-static">Static Render</a>
             </form>
         </div>
     )

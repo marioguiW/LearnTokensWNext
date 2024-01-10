@@ -27,15 +27,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/auth-page-ssr": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/auth-page-ssr.js"
-    ],
     "/auth-page-static": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/auth-page-static.js"
+    ],
+    "/logout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/logout.js"
     ]
   },
   "ampFirstPages": []
