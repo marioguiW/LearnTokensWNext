@@ -19,6 +19,9 @@ export default function ServerSide(props){
 }
 
 export const getServerSideProps = withSession((ctx) => {
+
+    console.log("COKIES", ctx.req.cookies)
+
     return{
         props: {
             session: ctx.req.session

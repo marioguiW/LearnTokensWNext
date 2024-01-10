@@ -17,6 +17,7 @@ export const tokenService = {
   },
   get(ctx = null) {
     const cookies = nookies.get(ctx);
+    // nao esta chegando o refresh token aqui
     return cookies[ACCESS_TOKEN_KEY] || '';
   },
   delete(ctx = null) {

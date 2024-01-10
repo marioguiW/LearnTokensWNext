@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import nookies from 'nookies'
 import { Component, useEffect, useState } from "react"
 import { authService } from "./authService"
 
@@ -7,7 +8,10 @@ import { authService } from "./authService"
 export function withSession(funcao){
     return async (ctx)=> {
         try{
+            console.log("ctx req", ctx.req.cookies) 
+            
             const session = await authService.getSession(ctx)
+            
             const modifiedProps = {
                 ...ctx,
                 req: {
@@ -17,10 +21,11 @@ export function withSession(funcao){
             }
             return funcao(modifiedProps)
         }catch{
+            console.log("caiu no erro")
             return {
                 redirect: {
                     permanent: false,
-                    destination: "/?error"
+                    destination: "/?errorkaka"
                 }
             }
         }
@@ -36,9 +41,13 @@ export function useSession(){
     useEffect(() => {
         authService.getSession()
             .then((response)=>{
+                console.log(response)
+                console.log("Linha teste", response)
             setSession(response)
         })
         .catch((error)=>{
+            console.error(error)
+            console.log("DEU ERRO NA SESSAO")
             setError(error)
         }).
         finally(()=>{
