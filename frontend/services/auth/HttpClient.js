@@ -27,22 +27,24 @@ export async function HttpClient(fetchUrl, fetchOptions = {}) {
       if(response.status !== 401) return response;
       console.log('Middleware: Rodar código para atualizar o token');
       
-      // const isServer = Boolean(fetchOptions?.ctx);
+      const isServer = Boolean(fetchOptions?.ctx);
+      console.log("isServer", isServer)
 
-      // console.log("Testando",fetchOptions?.ctx?.req?.cookies)
+      console.log("Testando Cookies :",fetchOptions?.ctx?.req?.cookies)
       
-      // const currentRefreshToken = fetchOptions?.ctx?.req?.cookies
-      // console.log("Current", currentRefreshToken)
+      const currentRefreshToken = fetchOptions?.ctx?.req?.cookies
+      console.log(currentRefreshToken, 'currentRefreshToken')
 
       try {
         // [Tentar atualizar os tokens]
         const refreshResponse = await HttpClient('http://localhost:3000/api/refresh', {
-          method: 'GET',
-          // body: isServer ? { refresh_token: currentRefreshToken } : undefined,
+          method: isServer ? 'PUT' : 'GET',
+          body: isServer ? { refresh_token: currentRefreshToken } : undefined,
         });
 
         console.log("1 -> ", refreshResponse)
 
+        console.log("Testando aqui calmo", refreshResponse.body.data)
         const newAccessToken = refreshResponse.body.data.respostaRefresh.access_token;
         console.log("tokenService.save(newAccessToken);", newAccessToken)
         const newRefreshToken = refreshResponse.body.data.respostaRefresh.refresh_token;  
@@ -51,13 +53,15 @@ export async function HttpClient(fetchUrl, fetchOptions = {}) {
         tokenService.save(newAccessToken);
 
         // [Guarda os Tokens]
-        // if(isServer) {
-        //   nookies.set(fetchOptions.ctx, 'REFRESH_TOKEN_NAME', newRefreshToken, {
-        //     httpOnly: true,
-        //     sameSite: 'lax',
-        //   })
+        if(isServer) {
+          nookies.set(fetchOptions.ctx, 'REFRESH_TOKEN_NAME', newRefreshToken, {
+            httpOnly: true,
+            sameSite: 'lax',
+          })
+
+          tokenService.save(newAccessToken);
+        }
         // // }
-        // tokenService.save(newAccessToken);
         // [Tentar rodar o request anterior]
 
         const retryResponse = await HttpClient(fetchUrl, {

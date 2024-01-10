@@ -29,16 +29,18 @@ const actions = {
 
         const cookies = nookies.get(ctx)
 
-        console.log("refresh token crl1", req.body.refresh_token)
+        console.log(req.body)
 
-        const refreshToken =  cookies[REFRESH_TOKEN_NAME] || req.body.refresh_token
+        console.log(cookies[REFRESH_TOKEN_NAME],"ou ", req.body.refresh_token)
+
+        const refreshToken =  cookies[REFRESH_TOKEN_NAME] || req.body.refresh_token.REFRESH_TOKEN_NAME
 
         console.log("token atual", refreshToken)
 
         const respostaRefresh = await HttpClient("http://localhost:4000/api/refresh", {
             method: "POST",
             body: {
-                refresh_token: refreshToken,
+                refresh_token: refreshToken
             }
         })
 
@@ -62,7 +64,7 @@ const actions = {
         }else{
             res.status(401).json({
                 status: 401,
-                message: "cai foras"
+                message: "cai AAAAAAAA"
             })
         }
 

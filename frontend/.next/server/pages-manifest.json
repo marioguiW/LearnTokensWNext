@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/auth-page-static": "pages/auth-page-static.js",
   "/auth-page-ssr": "pages/auth-page-ssr.js",
-  "/api/refresh": "pages/api/refresh.js"
+  "/api/refresh": "pages/api/refresh.js",
+  "/auth-page-static": "pages/auth-page-static.js"
 }
